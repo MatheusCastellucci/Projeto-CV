@@ -1,5 +1,5 @@
 <a href="https://github.com/MatheusCastellucci/Projeto-CV">
-    <img src="FFVI\imgs\logo.png" alt="FF6 logo" title="Magitek" align="right" height="100" />
+    <img src="FFVI\imgs\logo.png" alt="FF6 logo" title="Magitek" align="right" width="5%" height="5%" />
 </a>
 
 # FF6 Environment Segmentation
