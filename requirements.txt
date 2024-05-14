@@ -8,3 +8,4 @@ torchaudio
 easyocr
 requests
 bs4
+tqdm
