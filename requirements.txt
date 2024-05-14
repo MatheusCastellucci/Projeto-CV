@@ -2,8 +2,9 @@ opencv-python
 Pillow
 matplotlib
 numpy
-
 torch 
 torchvision 
 torchaudio
 easyocr
+requests
+bs4
