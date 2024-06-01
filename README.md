@@ -17,24 +17,44 @@ This project was developed for the Computer Vision course at Insper. The goal wa
 - [Team](#team)
 - [How it works](#how-it-works)
 
-# Installation
+# Installation/Cloning the repository
 
-THis library was made using Python 3.8. So make sure you have it installed.
-
-### Cloning the repository
-**Note:** Sill under construction!!
-To install the required packages, run the following command:
-
+This library was made using Python 3.8. So make sure you have it installed.
 ```bash
-pip install nome_da_biblioteca
+python3 --version
+pip3 --version
+```
+
+### Windows
+1. Open Command Prompt or PowerShell.
+2. Execute the following commands:
+
+```sh
+cd \path\to\desired\directory
+git clone https://github.com/MatheusCastellucci/Projeto-CV
+```
+
+### Linux/macOS
+1. Open the Terminal.
+2. Execute the following commands:
+
+```sh
+cd /path/to/desired/directory
+git clone https://github.com/MatheusCastellucci/Projeto-CV
+```
+
+Replace `\path\to\desired\directory` or `/path/to/desired/directory` with the path to the directory where you want to clone the repository.
+
+These commands will create a new folder named `Projeto-CV` in the specified directory, containing all the files from the repository.
+
+#### Once you have cloned the repository, you can install the required libraries by running the following command:
+```bash
+pip install -r requirements.txt
 ```
 
 # Usage
-To run the program, execute the following command:
-
-```bash
-python main.py
-```
+Our project is currently separetad into different jupyter notebooks, each one responsible for a different part of the game. Every single one of them has a dictionary with the paths to the images, so you can run them without any problem, you can just change the variable `escolha` to the desired image. With the images provided in the repository, you can run the notebooks without any problem. 
+We are planning on turning this into a package, so you can use it in your own projects, but for now, you can use the notebooks to understand how the code works. We aim to make functions that will receive the image, and depending on the function, diferent outputs will be returned.
 
 # How it works
 The project was designed with the aim of using classical computer vision techniques to address the challenges we would encounter. Thus, there was a significant focus on image segmentation and contour detection. Initially, our goal was to determine the current state of the game, which would allow us to extract various information from it, such as the possible actions the player could take at the exact moment, their location, among other information.
