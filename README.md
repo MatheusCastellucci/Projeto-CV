@@ -53,8 +53,7 @@ pip install -r requirements.txt
 ```
 
 # Usage
-Our project is currently separetad into different jupyter notebooks, each one responsible for a different part of the game. Every single one of them has a dictionary with the paths to the images, so you can run them without any problem, you can just change the variable `escolha` to the desired image. With the images provided in the repository, you can run the notebooks without any problem. 
-We are planning on turning this into a package, so you can use it in your own projects, but for now, you can use the notebooks to understand how the code works. We aim to make functions that will receive the image, and depending on the function, diferent outputs will be returned.
+Our project is currently separated into different Jupyter notebooks, each one responsible for a different part of the game. Each notebook contains a dictionary with the paths to the images, so you can run them without any problems by simply changing the variable `escolha` to the desired image. With the images provided in the repository, you can run the notebooks without any issues. We are planning to turn this into a package so you can use it in your own projects. For now, you can use the notebooks to understand how the code works. We aim to create functions that will receive the image and, depending on the function, return different outputs.
 
 # How it works
 The project was designed with the aim of using classical computer vision techniques to address the challenges we would encounter. Thus, there was a significant focus on image segmentation and contour detection. Initially, our goal was to determine the current state of the game, which would allow us to extract various information from it, such as the possible actions the player could take at the exact moment, their location, among other information.
