@@ -218,7 +218,7 @@ def compare_color_profile(image_path, save_directory='color_profiles'):
     
     return best_match, best_profile['h_min'], best_profile['h_max'], best_profile['s_min'], best_profile['s_max'], best_profile['v_min'], best_profile['v_max']
 
-def path_detection(name, t_h, t_s, t_v):
+def path_detection(name, t_h=50, t_s=50, t_v=50):
     _, h_min, h_max, s_min, s_max, v_min, v_max = compare_color_profile(name)
     original_image = Image.open(name)
     cv2_img = np.array(original_image)
