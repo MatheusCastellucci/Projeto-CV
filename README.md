@@ -3,20 +3,17 @@
 </a>
 
 # FF6 Environment Segmentation
- <h4 align="center"> 
-    :construction:  Project under construction  :construction:
-</h4> 
 
 This project was developed for the Computer Vision course at Insper. The goal was to implement an environment segmentation algorithm for the game Final Fantasy VI. We selected this game due to its simple and well-defined art style, which facilitates the segmentation of the environment from the characters. By leveraging OpenCV and Python, we successfully created a program capable of generating a game environment for bots to learn from.
 
 # Table of contents
 
-- [Installation](#Installation/Cloning the repository)
+- [Installation](#Installation)
 - [Usage](#usage)
 - [How it works](#how-it-works)
 - [Team](#team)
   
-# Installation/Cloning the repository
+# Installation
 
 This library was made using Python 3.8. So make sure you have it installed.
 ```bash
