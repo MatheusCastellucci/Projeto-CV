@@ -29,12 +29,12 @@ def plot_hsv(hist_h, hist_s, hist_v):
 
 def plot_diff(hist):
     # Calcular a primeira derivada do histograma
-    primeira_derivada = np.diff(hist.squeeze())
-    primeira_derivada = np.convolve(primeira_derivada.squeeze(), np.ones(10)/10, mode='valid')
+    first_derivative = np.diff(hist.squeeze())
+    first_derivative = np.convolve(first_derivative.squeeze(), np.ones(10)/10, mode='valid')
 
     # Calcular a segunda derivada do histograma
-    segunda_derivada = np.diff(primeira_derivada)
-    segunda_derivada = np.convolve(segunda_derivada.squeeze(), np.ones(10)/10, mode='valid')
+    second_derivative = np.diff(first_derivative)
+    second_derivative = np.convolve(second_derivative.squeeze(), np.ones(10)/10, mode='valid')
 
     # Plotar os gráficos
     plt.figure(figsize=(15, 5))
@@ -44,11 +44,11 @@ def plot_diff(hist):
     plt.title('Histograma Original')
 
     plt.subplot(1, 3, 2)
-    plt.plot(primeira_derivada)
+    plt.plot(first_derivative)
     plt.title('Primeira Derivada')
 
     plt.subplot(1, 3, 3)
-    plt.plot(segunda_derivada)
+    plt.plot(second_derivative)
     plt.title('Segunda Derivada')
 
     plt.tight_layout()
