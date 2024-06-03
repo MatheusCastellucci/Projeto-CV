@@ -39,31 +39,46 @@ def verificar_cor_azul(image, threshold=0.55, region_fraction=0.3):# Função pa
 
 
 def identificar_combate(image_path,reader):# Função para identificar combate na imagem
-    # Carregar a imagem
     image = cv2.imread(image_path)
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     
-    # Verificar se a imagem tem uma área significativa de cor azul na região inferior
     azul_presente = verificar_cor_azul(image)
     
-    # Aplicar OCR na imagem para detectar texto
-    #reader = easyocr.Reader(['en'])
     result = reader.readtext(image_rgb)
     
-    # Verificar se há qualquer texto detectado
-    combate_detectado = len(result) > 0
-    
     detected_texts = []
-    if combate_detectado:
+    if len(result) > 0:
+        last_bbox = None
+        combined_text = ""
+        max_x_distance = 25  # Ajuste conforme necessário
+        max_y_distance = 10  # Ajuste conforme necessário
+        
         for (bbox, text, prob) in result:
-            detected_texts.append(text)
- 
+            if last_bbox is not None:
+                # Verifica a proximidade dos bounding boxes
+                x_distance = bbox[0][0] - last_bbox[2][0]
+                y_distance = abs(bbox[0][1] - last_bbox[0][1])
+                
+                if x_distance < max_x_distance and y_distance < max_y_distance:
+                    combined_text += " " + text
+                else:
+                    detected_texts.append(combined_text)
+                    combined_text = text
+            else:
+                combined_text = text
+            
+            last_bbox = bbox
+        
+        # Adiciona o último texto combinado
+        if combined_text:
+            detected_texts.append(combined_text)
+        
     # Combinar os resultados para determinar se é uma cena de combate
-    if combate_detectado and azul_presente:
+    if len(detected_texts) > 0 and azul_presente:
         return True,detected_texts
     else:
         return False,[]
-
+    
 def options_cutscene(image_path,reader, offset_x=0, offset_y=0, width=150, height=90):
     # Load the images
     image = cv2.imread(image_path)
