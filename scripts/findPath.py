@@ -54,7 +54,7 @@ def plot_diff(hist):
     plt.tight_layout()
     plt.show()
 
-def find_path(img, tolerancia_h, tolerancia_s, tolerancia_v, h_min=0, h_max=0, s_min=0, s_max=0, v_min=0, v_max=0, usar_perfil=False):
+def find_path(img, tolerancia_h, tolerancia_s, tolerancia_v, h_min=0, h_max=0, s_min=0, s_max=0, v_min=0, v_max=0, use_profile=False):
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     
     # Criar uma máscara de ponderação para dar mais peso ao centro da img
@@ -99,7 +99,7 @@ def find_path(img, tolerancia_h, tolerancia_s, tolerancia_v, h_min=0, h_max=0, s
     valor_v_comum = np.argmax(hist_v)
     
     # Definir os limites do intervalo de cor baseados no valor de matiz (H) mais comum
-    if not usar_perfil:
+    if not use_profile:
         h_min = max(0, valor_h_comum - tolerancia_h)
         h_max = min(255, valor_h_comum + tolerancia_h)
         s_min = max(0, valor_s_comum - tolerancia_s)
@@ -218,9 +218,9 @@ def compare_color_profile(image_path, save_directory='color_profiles'):
     
     return best_match, best_profile['h_min'], best_profile['h_max'], best_profile['s_min'], best_profile['s_max'], best_profile['v_min'], best_profile['v_max']
 
-def path_detection(name, t_h=50, t_s=50, t_v=50):
+def path_detection(name, t_h=50, t_s=50, t_v=50, use_profile=False):
     _, h_min, h_max, s_min, s_max, v_min, v_max = compare_color_profile(name)
     original_image = Image.open(name)
     cv2_img = np.array(original_image)
-    output, h_min, h_max, s_min, s_max, v_min, v_max = find_path(cv2_img, t_h, t_s, t_v, h_min, h_max, s_min, s_max, v_min, v_max, True)
+    output, h_min, h_max, s_min, s_max, v_min, v_max = find_path(cv2_img, t_h, t_s, t_v, h_min, h_max, s_min, s_max, v_min, v_max, use_profile)
     return output
