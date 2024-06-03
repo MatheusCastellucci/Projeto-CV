@@ -57,7 +57,7 @@ def plot_diff(hist):
 def find_path(img, tolerancia_h, tolerancia_s, tolerancia_v, h_min=0, h_max=0, s_min=0, s_max=0, v_min=0, v_max=0, usar_perfil=False):
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     
-    # Criar uma máscara de ponderação para dar mais peso ao centro da imagem
+    # Criar uma máscara de ponderação para dar mais peso ao centro da img
     rows, cols, _ = img.shape
     center_row, center_col = rows // 2, cols // 2
     weight_mask = np.zeros((rows, cols), dtype=np.float32)
@@ -107,11 +107,11 @@ def find_path(img, tolerancia_h, tolerancia_s, tolerancia_v, h_min=0, h_max=0, s
         v_min = max(0, valor_v_comum - tolerancia_v)
         v_max = min(255, valor_v_comum + tolerancia_v)
 
-    imagem_blur = cv2.GaussianBlur(hsv, (13, 13), 0)
-    imagem_blur = cv2.GaussianBlur(imagem_blur, (11, 11), 0)
-    imagem_blur = cv2.GaussianBlur(imagem_blur, (7, 7), 0)
-    imagem_blur = cv2.GaussianBlur(imagem_blur, (5, 5), 0)
-    imagem_blur = cv2.GaussianBlur(imagem_blur, (3, 3), 0)
+    img_blur = cv2.GaussianBlur(hsv, (13, 13), 0)
+    img_blur = cv2.GaussianBlur(img_blur, (11, 11), 0)
+    img_blur = cv2.GaussianBlur(img_blur, (7, 7), 0)
+    img_blur = cv2.GaussianBlur(img_blur, (5, 5), 0)
+    img_blur = cv2.GaussianBlur(img_blur, (3, 3), 0)
 
     lowerb = np.array([h_min, s_min, v_min])
     upperb = np.array([h_max, s_max, v_max])
@@ -120,25 +120,25 @@ def find_path(img, tolerancia_h, tolerancia_s, tolerancia_v, h_min=0, h_max=0, s
     mascara = cv2.inRange(hsv, lowerb, upperb)
 
     kernel = np.ones((3,3), np.uint8)
-    imagem_dilatada = cv2.dilate(mascara, kernel, iterations=8)
+    img_dilatada = cv2.dilate(mascara, kernel, iterations=8)
 
     kernel = np.ones((3,3), np.uint8)
-    imagem_erodida = cv2.erode(imagem_dilatada, kernel, iterations=10)
-    imagem_invertida = cv2.bitwise_not(imagem_erodida)
+    img_erodida = cv2.erode(img_dilatada, kernel, iterations=10)
+    img_reversed = cv2.bitwise_not(img_erodida)
 
-    contorno = cv2.bitwise_and(img, img, mask=imagem_invertida)
+    contorno = cv2.bitwise_and(img, img, mask=img_reversed)
     
     plt.figure()
     plt.imshow(contorno, cmap="gray")
     plt.axis('off')
-    return h_min, h_max, s_min, s_max, v_min, v_max
+    return img_reversed, h_min, h_max, s_min, s_max, v_min, v_max
 
 def save_color_profile(image_path, profile_name, h_min, h_max, s_min, s_max, v_min, v_max, save_directory='color_profiles'):
-    # Carregar a imagem
+    # Carregar a img
     image = Image.open(image_path)
     image = image.convert('RGB')
     
-    # Converter a imagem para HSV
+    # Converter a img para HSV
     hsv_image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2HSV)
     
     # Calcular os histogramas
@@ -176,11 +176,11 @@ def save_color_profile(image_path, profile_name, h_min, h_max, s_min, s_max, v_m
     print(f'Perfil de cores salvo em: {profile_path}')
 
 def compare_color_profile(image_path, save_directory='color_profiles'):
-    # Carregar a imagem
+    # Carregar a img
     image = Image.open(image_path)
     image = image.convert('RGB')
     
-    # Converter a imagem para HSV
+    # Converter a img para HSV
     hsv_image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2HSV)
     
     # Calcular os histogramas
@@ -200,7 +200,7 @@ def compare_color_profile(image_path, save_directory='color_profiles'):
             with open(os.path.join(save_directory, filename), 'rb') as f:
                 profiles.append((filename, pickle.load(f)))
     
-    # Comparar a imagem com cada perfil de cores
+    # Comparar a img com cada perfil de cores
     max_correlation = -1
     best_match = None
     best_profile = None
@@ -222,4 +222,5 @@ def path_detection(name, t_h, t_s, t_v):
     _, h_min, h_max, s_min, s_max, v_min, v_max = compare_color_profile(name)
     original_image = Image.open(name)
     cv2_img = np.array(original_image)
-    return find_path(cv2_img, t_h, t_s, t_v, h_min, h_max, s_min, s_max, v_min, v_max, True)
+    output, h_min, h_max, s_min, s_max, v_min, v_max = find_path(cv2_img, t_h, t_s, t_v, h_min, h_max, s_min, s_max, v_min, v_max, True)
+    return output
