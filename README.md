@@ -11,12 +11,11 @@ This project was developed for the Computer Vision course at Insper. The goal wa
 
 # Table of contents
 
-- [Installation](#installation)
-  - [Cloning the repository](#cloning-the-repository)
+- [Installation](#Installation/Cloning the repository)
 - [Usage](#usage)
-- [Team](#team)
 - [How it works](#how-it-works)
-
+- [Team](#team)
+  
 # Installation/Cloning the repository
 
 This library was made using Python 3.8. So make sure you have it installed.
