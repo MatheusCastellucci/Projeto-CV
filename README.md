@@ -51,7 +51,9 @@ pip install -r requirements.txt
 ```
 
 # Usage
-Our project consists of several functions, each implemented in a separate Python file. For each function, we have a corresponding Jupyter notebook containing the implementations and a dictionary of possible test images. Additionally, we have a function that consolidates all these implementations and performs all the necessary tasks. In the repository, there is a Python file called main.py, where you can see an example of using this consolidating function.
+Our project consists of several functions, seprated betweenn two Python file. For each function, we have a corresponding Jupyter notebook containing the implementations and a dictionary of possible test images. Additionally, we have a function that consolidates all these implementations and performs all the necessary tasks. In the repository, there is a Python file called main.py, where you can see an example of using this consolidating function.
+
+For the Jupyter section, we adopted a simple naming convention to differentiate discarded ideas from the final functions. Files that start with “prototype” contain abandoned or incomplete ideas developed throughout the project, while files that start with “Test” are tests of the final versions where you can make any modifications you want.
 
 # How it works
 The project was designed with the aim of using classical computer vision techniques to address the challenges we would encounter. Thus, there was a significant focus on image segmentation and contour detection. Initially, our goal was to determine the current state of the game, which would allow us to extract various information from it, such as the possible actions the player could take at the exact moment, their location, among other information.
@@ -72,7 +74,7 @@ With this information, we were able to determine the current state of the game a
 <div style="display: flex;">
     <div style="flex: 1; margin-right: 100px;">
         <h3 style="font-size: 14px;">1.Exploration</h3>
-        <img src="FFVI\Maps\planicie3.jpg" >
+        <img src="FFVI\Maps\planicie.jpg" >
     </div>
     <div style="flex: 1; margin-right: 10px;">
         <h3 style="font-size: 14px;">2.Combat</h3>
@@ -83,23 +85,6 @@ With this information, we were able to determine the current state of the game a
         <img src="FFVI\Dialog\textbox_with_img.png" width="77%" height="77%">
     </div>
 </div>
-
-### Here is the final result of the segmentation:
-<div style="display: flex;">
-    <div style="flex: 1; margin-right: 100px;">
-        <h3 style="font-size: 14px;">1.Exploration</h3>
-        <img src="FFVI\Maps\planicie3_mask.jpg" >
-    </div>
-    <div style="flex: 1; margin-right: 10px;">
-        <h3 style="font-size: 14px;">2.Combat</h3>
-        <img src="results\Combat\Combate.jpg" width="77%" height="77%">
-    </div>
-    <div style="flex: 1; margin-right: 10px;">
-        <h3 style="font-size: 14px;">3.Cutscene</h3>
-        <img src="FFVI\Dialog\textbox_with_img_mask.png" width="77%" height="77%">
-    </div>
-</div>
-
 
 # Discarded Concepts
 Originally, for the exploration part, we planned to identify the player's position on the map and, from there, determine which parts of the map are accessible. To achieve this goal, we tested different methods, including template matching and machine learning. Unfortunately, we were not successful with any of these approaches.
