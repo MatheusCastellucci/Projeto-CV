@@ -11,6 +11,8 @@ This project was developed for the Computer Vision course at Insper. The goal wa
 - [Installation](#Installation)
 - [Usage](#usage)
 - [How it works](#how-it-works)
+- [Discarded Concepts](#discarded-concepts)
+- [References](#references)
 - [Team](#team)
   
 # Installation
@@ -100,8 +102,25 @@ With this information, we were able to determine the current state of the game a
 
 
 # Discarded Concepts
+Originally, for the exploration part, we planned to identify the player's position on the map and, from there, determine which parts of the map are accessible. To achieve this goal, we tested different methods, including template matching and machine learning. Unfortunately, we were not successful with any of these approaches.
 
+### Challenges with Template Matching
+With 16 different characters, each having distinct sprites for their movements, template matching proved unfeasible due to the vast variation of sprites.
 
+### Machine Learning Approach
+For the machine learning approach, we created a web scraper to download GIFs of playable characters, using the site videogamesprites.net as a source. We then trained a ResNet-50 model to identify these characters in images. However, during testing, the model failed to identify any characters.
+
+### Improvement Attempts
+To improve results, we tried augmenting the training data by distorting the GIFs to handle images of different proportions and introduced Gaussian noise into the model. Despite these attempts, the model remained unable to identify the characters.
+
+### Alternative Method
+Additionally, we developed a code that crops the central region of an image, draws a colored rectangle at the position where the player is usually found (typically in the center of the image, but with variations), and identifies the three most predominant colors in the image, disregarding the color of the drawn rectangle. Initially, we planned to use these colors to create a comparison profile and decide which transformations to apply to the image. However, we decided to abandon this idea in favor of comparing the obtained histogram.
+
+Since we could not find the playable characters, despite having extensive training data, we eventually abandoned the idea of finding non-playable characters as well.
+
+# References
+
+- Site from which we took most of the images and templates used for our tests: [Final Fantasy VI](https://www.videogamesprites.net/FinalFantasy6/Party/)
 
 # Team
 - [Bruno Freitas](https://github.com/BrunoFNRodrigues)
